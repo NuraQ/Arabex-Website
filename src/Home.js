@@ -1,35 +1,21 @@
 import React from 'react';
-
-
 import './homee.css';
-
-import Display from './Display';
-import { MeventEmitter, url_g, mainUrl } from './globals.js'
-
-import { BrowserRouter as Router, Link, NavLink, Redirect, Prompt, Route } from 'react-router-dom';
+import { mainUrl } from './globals.js'
 import { Slide } from 'react-slideshow-image';
 
 
 const ExtraImgs = ({ ELEMENT }) => {
-  var images_array = [];
-
   if (ELEMENT) {
     return (ELEMENT.map(per => (
-
       <div className="grid-item" >
-
             <div className="colorBack">
-              <img class="imgStyle " src={encodeURI("http://127.0.0.1:9999/load_image/?img=" + `${per.image}` + "&&type=" + `${per.category_id}`)} />
-              
-  
+              <img class="imgStyle " src={encodeURI(`${mainUrl.url}` + `${per.image}` + "&&type=" + `${per.category_id}`)} /> 
         </div>
-
       </div>
-
     ))
     )
   } else {
-    return (<div></div>)
+    return (<div/>)
   }
 }
 const properties = {
@@ -84,8 +70,7 @@ class Home extends React.Component {
     this.state = {
       appeardara: false,
       loading: true,
-      mainUrl: "http://127.0.0.1:9999",
-
+      mainUrl: mainUrl.url,
       persons: [],
       productTemp: []
     };
@@ -104,7 +89,6 @@ class Home extends React.Component {
     return (
       <div>
         <div>
-
           <Slideshow />
           <div className="grid-container">
               <ExtraImgs ELEMENT={this.state.persons}></ExtraImgs>
