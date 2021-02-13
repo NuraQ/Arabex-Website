@@ -65,7 +65,7 @@ class Villlas extends React.Component {
 
     async componentWillMount() {
         if (this.props.location.type !== null)
-        var url = this.state.mainUrl + "/" + "?type=" + this.props.match.params.type;
+            var url = this.state.mainUrl + "/" + "?type=" + this.props.match.params.type;
         let response = await fetch(url)
         let data = await response.json();
         this.setState({ persons: data, loading: false });
@@ -108,7 +108,7 @@ class Villlas extends React.Component {
         )
         )
 
-        const ListGridd = () => {
+        const ListGrid = () => {
             let ind = this.state.index;
             return (
                 <div>
@@ -134,7 +134,7 @@ class Villlas extends React.Component {
 
         return (
             <div >
-                <div class="container"> <ListGridd /> </div>
+                <div class="container"> <ListGrid /> </div>
                 <div class="container">
                     <div > <button onClick={() => { this.decrement() }}>Previous Page</button>{this.state.dontSlide}</div>
                     <span class="col-sm"><ColoredLineThin color="rgb(128, 128, 128)" /></span>

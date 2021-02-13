@@ -3,15 +3,8 @@ import './About.css'
 import archh from './archh.jpg'
 import Contact from './ContactUS'
 import Beere from './Beere.jpg'
-const ColoredLine = ({ color }) => (
-  <hr
-    style={{
-      color: color,
-      backgroundColor: color,
-      height: 3
-    }}
-  />
-);
+import { mainUrl } from './globals';
+
 const AboutCompany = () => {
   return (
     <div>
@@ -20,7 +13,6 @@ const AboutCompany = () => {
         <div class="row" style={{ height: "660px" }}>
           <div class="col-sm" style={{ backgroundImage: `url(${archh})`, alignContent: "center" }}>
           </div>
-
           <div class="col-sm">
             <p className="description">Arab Experts for Engineering and Consultation was established in the year 2010 by a group
             of architects and engineers that are looking forward for better architecture and engineering
@@ -29,9 +21,7 @@ const AboutCompany = () => {
             ARABEX has been registered by the Engineers Association as an Engineering Consultant
             company N0. 1092. The company provides services and consultations including private and public
             sectors in the following fields
-<li>
-                Architectural design.
-</li>
+              <li> Architectural design. </li>
               <li>Supervision.</li>
               <li>Urban Planning.</li>
               <li>Conservation and Rehabilitation..</li>
@@ -41,8 +31,7 @@ const AboutCompany = () => {
               <li>Management</li>
               <br></br>
               <p style={{ fontSize: "22px" }}>Partners of the Company:
-<p style={{ fontSize: "20px" }}> Sami Qasrawi , Bilal Alkhayyat and  Azzam Qasrawi.</p></p >
-
+              <p style={{ fontSize: "20px" }}> Sami Qasrawi , Bilal Alkhayyat and  Azzam Qasrawi.</p></p >
             </p>
           </div>
         </div>
@@ -71,22 +60,16 @@ class About extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
-      mainUrl: "http://127.0.0.1:9999",
+      mainUrl: mainUrl.url,
       owners: [],
-
     }
     this.GridOwners = this.GridOwners.bind(this);
-
   }
   async componentDidMount() {
     var url = this.state.mainUrl + "/" + "?type=" + "owners";
-    console.log("URL" + url);
-    console.log("DSd");
     let response = await fetch(url)
     let data = await response.json();
     this.setState({ owners: data });
-    console.log("this is owners" + JSON.stringify(data))
   }
   
   GridOwners = () => {
