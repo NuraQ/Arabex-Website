@@ -1,6 +1,6 @@
 import React, { memo, useRef } from "react";
-import { useDrag, useDrop,drop } from "react-dnd";
-import {useGlobalState,setDragging} from './GlobalState';
+import { useDrag, useDrop } from "react-dnd";
+import {setDragging} from './GlobalState';
 
 function handleThis(){
   setDragging(true)
@@ -31,8 +31,6 @@ const DragItem = memo(({ id, onMoveItem, children }) => {
     }
   });
 
-  
-
   const [, connectDrop] = useDrop({
     accept: "IMG",
     
@@ -45,14 +43,14 @@ const DragItem = memo(({ id, onMoveItem, children }) => {
   }
   );
 
-  const [, chk] = useDrop({
-    accept: "IMG",
+  // const [, chk] = useDrop({
+  //   accept: "IMG",
     
-   drop(target){
+  //  drop(target){
 
-   }
-  }
-  );
+  //  }
+  // }
+  // );
   connectDrag(ref);
   connectDrop(ref);
 

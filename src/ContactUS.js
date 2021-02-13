@@ -1,13 +1,6 @@
 import React from 'react';
-import { withRouter } from "react-router";
-import { url_g } from './globals';
-import archh from './archh.jpg'
 import './Eleme.css'
-import GR from './GR.jpg';
-import Update from './Update';
 import Beere from './Beere.jpg'
-import { Slide } from 'react-slideshow-image';
-import CrossfadeImage from 'react-crossfade-image';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faYoutube,

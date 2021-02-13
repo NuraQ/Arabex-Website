@@ -1,31 +1,7 @@
 import React from 'react';
-import DatePicker from 'react-date-picker';
-import LoggedHeader from './LoggedHeader'
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-
-//import ReactDOM from 'react-dom';
-// Usually we use one component per file, here we have more
-import { MeventEmitter, url_g, User_g } from './globals.js'
-import Dropdown from 'react-dropdown'
+import { mainUrl } from './globals.js'
 import './Add.css'
-
-const options = [
-    { value: 'one', label: 'One' },
-    { value: 'two', label: 'Two', className: 'myOptionClassName' },
-    {
-        type: 'group', name: 'group1', items: [
-            { value: 'three', label: 'Three', className: 'myOptionClassName' },
-            { value: 'four', label: 'Four' }
-        ]
-    },
-    {
-        type: 'group', name: 'group2', items: [
-            { value: 'five', label: 'Five' },
-            { value: 'six', label: 'Six' }
-        ]
-    }
-]
-const defaultOption = options[0]
 
 
 class Add extends React.Component {
@@ -51,30 +27,11 @@ class Add extends React.Component {
             adminId: "",
             adminPassword: "",
             ID: null,
-            year: new Date(),
             //other properties
         }
         //this.onChange = this.onChange.bind(this);
     }
 
-    async fetchImage(data) {
-        var url = "http://127.0.0.1:9999/file_upload";
-
-        const response = await fetch(url, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-            },
-
-            body: data,
-            credentials: 'include'
-
-        });
-        const body = await response.text();
-
-
-
-    }
     componentDidMount() {
         /* var urlll = "http://127.0.0.1:9999/redirectPage/";
  
@@ -97,12 +54,8 @@ class Add extends React.Component {
     }
 
     mySubmitHandler() {
-        // if (!this.state.imageSource) return;
-        //if (!this.isUploading) return;
-        console.log("dddd===================dddddddd");
-
-        let url = "http://127.0.0.1:9999/file_upload";
-        var imageName = this.state.imageName;
+        var imgs = []
+        let url = `${mainUrl.url}/file_upload`;
         const data = new FormData();
         data.append("file", this.state.imageSource);
         data.append("imageName", this.state.imageName);
@@ -111,12 +64,11 @@ class Add extends React.Component {
         data.append('mainImage', this.state.mainImage);
         data.append('cat_id', this.state.type);
 
-        if (this.state.mainImage.localeCompare("images") == 0) {
-            this.state.images += this.state.imageName + ",";
+        if (this.state.mainImage.localeCompare("images") === 0) {
+            imgs += this.state.imageName + ",";
         }
+        this.setState({images: imgs})
         data.append("images", this.state.images);
-
-        console.log("dddd===================dddddddd");
         console.log(this.state.jsonResponse.id);
         this.setState({ isUploaded: false, isUploading: true })
         fetch(url, {
@@ -136,42 +88,27 @@ class Add extends React.Component {
     }
 
     async doFetch() {
-        //console.log(this.state);
-
-        var url = "http://127.0.0.1:9999/add_items/:id"
+        let url = `${mainUrl.url}/file_upload`;
         const response = await fetch(url, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
             },
             credentials: 'same-origin',
-
-
             body: JSON.stringify(this.state),
         });
-
 
         this.state.jsonResponse = await response.json();
         this.state.ID = await this.state.jsonResponse.id;
         this.state.images = "";
-        console.log("stsID" + this.state.ID);
+        this.setState({images: ""})
         alert(this.state.jsonResponse.success);
-
         this.mySubmitHandler();
-
-        //onsole.log("InsertID"+this.state.ID);
-        //console.log(this.state.jsonResponse.insertid);
-
-
-
     }
     handleID = e => {
         this.setState({ [e.target.name]: e.target.value });
-        console.log(e.target.value);
-
-        console.log(e.target.name);
-
     }
+
     handleSelectedFile = event => {
         try {
             let file = event.target.files[0];
@@ -190,15 +127,11 @@ class Add extends React.Component {
             alert("Error nothing chosen")
         }
         console.log(this.state.mainImage);
-
-
     }
 
 
     submitInput() {
-        // event.preventDefault();
         this.doFetch();
-        // this.mySubmitHandler();
     }
     myChangeHandler = (event) => {
 
@@ -231,7 +164,7 @@ class Add extends React.Component {
     addNewAdmin() {
         var adminId = this.state.adminId;
         var adminPassword = this.state.adminPassword;
-        let url = "http://127.0.0.1:9999/add_admin/:id/"
+        let url = `${mainUrl.ur}/add_admin/:id/`
         fetch(url, {
             method: "post",
 
@@ -241,12 +174,9 @@ class Add extends React.Component {
             .then(r => alert(r.success));
     }
 
-
-
     onChange2 = date => this.setState({ ExpirationDate: date, date: date })
     onChange = date => this.setState({ year: date })
     render() {
-        let imgServerUr2 = "http://127.0.0.1:9999/uplds/" + this.state.imageName;
         let imgServerUrl = "http://127.0.0.1:9999/load_image?img=" + this.state.imageName + "&&type=" + this.state.type;
         return (
             <div className='row' >
@@ -311,12 +241,12 @@ class Add extends React.Component {
                                         />
 
                                         {this.state.imageName && this.state.isUploaded &&
-                                            <img
+                                            <img alt="img to upload"
                                                 src={encodeURI(imgServerUrl)}
                                                 style={{ width: 200, height: 120 }}
                                             />
                                         }
-                                        <img
+                                        <img alt="img to upload"
                                             src={this.state.file_url}
                                             style={{ width: 200, height: 120 }}
                                         />
@@ -336,12 +266,12 @@ class Add extends React.Component {
                         />
                         {this.state.mainImage}
                         {this.state.imageName && this.state.isUploaded &&
-                            <img
+                            <img alt="img to upload"
                                 src={encodeURI(imgServerUrl)}
                                 style={{ width: 200, height: 120 }}
                             />
                         }
-                        <img
+                        <img alt="img to upload"
                             src={this.state.file_url}
                             style={{ width: 200, height: 120 }}
                         />

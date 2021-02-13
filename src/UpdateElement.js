@@ -11,15 +11,11 @@ const ExtraImgs = ({ ELEMENT }) => {
     if (ELEMENT && ELEMENT.images) {
         images_array = ELEMENT.images.split(",");
         return (images_array.map(img => (
-
             <div>
                 <div class="container" >
                     <div class="row">
-
                         <div class="col-sm" style={{ backgroundColor: "darkgrey" }}>
                             <img class="imgStyle" src={encodeURI("http://127.0.0.1:9999/load_image/?img=" + `${img}` + "&&type=" + `${ELEMENT.category_id}`)} />
-
-
                         </div>
                     </div>
                 </div>

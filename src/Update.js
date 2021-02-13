@@ -1,94 +1,17 @@
 
 import React from 'react';
-import archh from './archh.jpg'
 import DND from './DND'
 //import ReactDOM from 'react-dom';
 // Usually we use one component per file, here we have more
-import { MeventEmitter, url_g, User_g } from './globals.js'
+import { mainUrl} from './globals.js'
 import './Villa.css';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { withRouter } from "react-router";
 import { setValues } from './GlobalState';
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import {
-  faYoutube,
-  faFacebook,
-  faTwitter,
-  faInstagram,
-  faThinkPeaks
-} from "@fortawesome/free-brands-svg-icons";
-import {
-  faEnvelope,
-} from "@fortawesome/free-regular-svg-icons";
-import GR from './GR.jpg';
+import Contact from './ContactUS'
 import './gallery.css'
 
-import Elem from './Elem'
-import Home from './Home'
-const grid = 8;
 
-
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-  // some basic styles to make the items look a bit nicer
-  userSelect: "none",
-  padding: grid * 2,
-  margin: `0 0 ${grid}px 0`,
-
-  // change background colour if dragging
-  background: isDragging ? "lightgreen" : "grey",
-
-  // styles we need to apply on draggables
-  ...draggableStyle
-});
-
-const getListStyle = isDraggingOver => ({
-  background: isDraggingOver ? "lightblue" : "lightgrey",
-  padding: grid,
-});
-const Contact = () => (
-  <div style={{
-    display: "flex",
-
-    width: "100%",
-    backgroundImage: `url(${GR})`,
-    justifyContent: "center",
-    alignItems: "center",
-    //   backgroundColor: "rgb(250, 235, 215)",
-    height: 500
-  }}
-  >
-    <div
-
-      style={{
-        display: "inline-block",
-        height: 400,
-        width: "75%",
-        backgroundColor: "#e2e7ec",/* fallback color */
-        background: "#e2e7ec",
-        opacity: 0.8,
-
-      }}
-
-    >
-      <p style={{
-        fontSize: "1.4em",
-
-        marginTop: "14px",
-
-        marginLeft: "10px",
-      }}>Contact Us
-            </p>
-      <pre >{
-        ` Michael Graves Architecture & Design
- 341 Nassau St.
- Princeton, NJ 08540`}
-      </pre>
-      <SocialFollow />
-    </div>
-  </div>
-);
 const reorder = (list, startIndex, endIndex) => {
   const result = Array.from(list);
   const [removed] = result.splice(startIndex, 1);
@@ -115,40 +38,7 @@ const ColoredLineThin = ({ color }) => (
   />
 );
 
-function SocialFollow() {
-  return (
-    <div className="social-container">
-      <a
-        href="https://www.youtube.com/c/jamesqquick"
-        className="youtube social"
-      >
-        <FontAwesomeIcon icon={faYoutube} size="2x" />
-      </a>
-      <a
-        href="https://www.facebook.com/Arabex-Arab-Experts-For-Architecture-Consultations-377223399037285/"
-        className="facebook social"
-      >
-        <FontAwesomeIcon icon={faFacebook} size="2x" />
-      </a>
-      <a href="https://www.twitter.com/jamesqquick" className="twitter social">
-        <FontAwesomeIcon icon={faTwitter} size="2x" />
-      </a>
-      <a
-        href="https://www.instagram.com/learnbuildteach"
-        className="instagram social"
-      >
-        <FontAwesomeIcon icon={faInstagram} size="2x" />
-      </a>
-      <br></br>
-      <a href="mailto:arabex.eng@gmail.com"
-        className="social">
 
-        <FontAwesomeIcon icon={faEnvelope} size="2x" />
-        arabex.eng@gmail.com
-        </a>
-    </div>
-  );
-}
 class Villlas extends React.Component {
 
   constructor(props) {
@@ -156,7 +46,7 @@ class Villlas extends React.Component {
     this.state = {
       dontSlide: true,
 
-      mainUrl: "http://127.0.0.1:9999",
+      mainUrl: mainUrl.url,
       persons: [],
       index: 0,
       img: null,
@@ -200,25 +90,17 @@ class Villlas extends React.Component {
     console.log("fdsfsfs" + this.props.match.params.type
     );
     if (this.props.location.type !== null)
-      console.log("dsdsdsDsdsdsdsdsds" + this.props.location.type);
     var url = this.state.mainUrl + "/" + "?type=" + this.props.match.params.type;
-    console.log("URL" + url);
-    console.log("DSd");
     let response = await fetch(url)
     let data = await response.json();
     this.setState({ persons: data, loading: false });
       if (this.state.persons && this.state.persons.length > 0) {
         console.log("original" + this.state.persons)
         setValues(this.state.persons)
-
-        //setGlobalState(this.state.persons);
       }
 
   }
 
-  componentWillUnmount() {
-
-  }
   passData(name, ID, img, area, year, images, location, cat_id) {
     console.log("locTest" + location);
     this.props.history.push({
@@ -226,9 +108,6 @@ class Villlas extends React.Component {
       state: { name: name, id: ID, image: img, area: area, year: year, images: images, locationn: location, type: cat_id }//has nothing with component state
     })
   }
-
-
-
 
   toggle() {
     let prev_index = this.state.index;
@@ -244,7 +123,6 @@ class Villlas extends React.Component {
 
     let url2 = this.state.mainUrl + "/load_image/?img=";
     const list = this.state.persons.map(person => (
-
       <div key={person.ID}  >
         <div class="col-sm" >
           <div class="wid">
@@ -252,12 +130,8 @@ class Villlas extends React.Component {
             <p>mt5lls ya 3m :)</p>
           </div>
         </div>
-
       </div>
-
-
     )
-
     )
 
     const ListGrid = () => {

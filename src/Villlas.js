@@ -122,7 +122,7 @@ class Villlas extends React.Component {
 
         return (
             <div >
-                <div class="container"> <ListGrid /> </div>
+                <div class="container"> <ListGrid/> </div>
                 <div class="container">
                     <div > <button onClick={() => { this.decrement() }}>Previous Page</button>{this.state.dontSlide}</div>
                     <span class="col-sm"><ColoredLineThin color="rgb(128, 128, 128)" /></span>
