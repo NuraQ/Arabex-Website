@@ -8,7 +8,6 @@ import { mainUrl } from './globals';
 const AboutCompany = () => {
   return (
     <div>
-
       <div style={{ margin: "70px" }} class="container" className="divColor">
         <div class="row" style={{ height: "660px" }}>
           <div class="col-sm" style={{ backgroundImage: `url(${archh})`, alignContent: "center" }}>
@@ -39,22 +38,21 @@ const AboutCompany = () => {
     </div>
   )
 }
-const clients = () => {
-  return (<div class="row">{this.state.owners.map(person => (
-    <div class="col-sm" key={person.ID}  >
-      <div class="" style={{ backgroundColor: "" }}>
-        {/* <img class="imgStyle" src={encodeURI(url2 + `${person.image}` + "&&type=" + `owners`)} /> */}
-        <img class = "imgStyle" src={Beere}></img>
-        <p>{person.name}</p>
-        <p>{person.info}</p>
-        <p>{person.email}</p>
-      </div>
-    </div>
+// const clients = () => {
+//   return (<div class="row">{this.state.owners.map(person => (
+//     <div class="col-sm" key={person.ID}  >
+//       <div class="" style={{ backgroundColor: "" }}>
+//         <img alt={person.name} class = "imgStyle" src={Beere}></img>
+//         <p>{person.name}</p>
+//         <p>{person.info}</p>
+//         <p>{person.email}</p>
+//       </div>
+//     </div>
 
-  ))}
-  </div>
-  )
-}
+//   ))}
+//   </div>
+//   )
+// }
 class About extends Component {
 
   constructor(props) {
@@ -66,19 +64,18 @@ class About extends Component {
     this.GridOwners = this.GridOwners.bind(this);
   }
   async componentDidMount() {
-    var url = this.state.mainUrl + "/" + "?type=" + "owners";
+    var url = this.state.mainUrl + "/?type=owners";
     let response = await fetch(url)
     let data = await response.json();
     this.setState({ owners: data });
   }
   
   GridOwners = () => {
-    let url2 = this.state.mainUrl + "/load_image/?img=";
     return (<div class="row">{this.state.owners.map(person => (
       <div class="col-sm" key={person.ID}  >
         <div class="" style={{ backgroundColor: "" }}>
           {/* <img class="imgStyle" src={encodeURI(url2 + `${person.image}` + "&&type=" + `owners`)} /> */}
-          <img class = "imgStyle" src={Beere}></img>
+          <img alt={person.name} class = "imgStyle" src={Beere}></img>
           <p>{person.name}</p>
           <p>{person.info}</p>
           <p>{person.email}</p>
