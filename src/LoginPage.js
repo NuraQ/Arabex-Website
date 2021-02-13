@@ -101,10 +101,7 @@ class LoginPage extends Component {
       this.setState({ storeURL: e.target.value });
     }
   }
-  handleURL = e => {
-    mainUrl.url = this.state.storeURL;
-    this.forceUpdate();
-  }
+
   render() {
     return (
 
@@ -143,7 +140,6 @@ class LoginPage extends Component {
                     label='Your password'
                     group
                     type='password'
-
                     data-test="password" value={this.state.password} onChange={this.handlePassChange}
                     validate
                     labelClass='white-text'
@@ -176,9 +172,7 @@ class LoginPage extends Component {
         ) : (<BrowserRouter>
           {/* <label onClick={() => this.passData(this.state.username, this.state.password)} value="click here">/*/}
           <Route path="/" render={() => <div><Add /></div>} />
-
         </BrowserRouter>
-
           )}
       </MDBContainer>
     );

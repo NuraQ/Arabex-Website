@@ -65,7 +65,7 @@ class Villlas extends React.Component {
 
     async componentWillMount() {
         if (this.props.location.type !== null)
-            var url = this.state.mainUrl + "/" + "?type=" + this.props.match.params.type;
+            var url = this.state.mainUrl + `/?type=` + this.props.match.params.type;
         let response = await fetch(url)
         let data = await response.json();
         this.setState({ persons: data, loading: false });
@@ -79,7 +79,7 @@ class Villlas extends React.Component {
     }
     passData(name, ID, img, area, year, images, location, cat_id) {
         this.props.history.push({
-            pathname: "/Villlas/Elem/" + `${ID}`,
+            pathname: `/Villlas/Elem/${ID}`,
             state: { name: name, id: ID, image: img, area: area, year: year, images: images, locationn: location, type: cat_id }//has nothing with component state
         })
     }
@@ -96,18 +96,6 @@ class Villlas extends React.Component {
 
     render() {
         let url2 = this.state.mainUrl + "/load_image/?img=";
-        const list = this.state.persons.map(person => (
-            <div key={person.ID}  >
-                <div class="col-sm" >
-                    <div class="wid">
-                        <img class="imagesGrid" src={encodeURI(url2 + `${person.image}` + "&&type=" + `${person.category_id}`)} onClick={() => this.passData(person.name, person.id, encodeURI(url2 + `${person.image}` + "&&type=" + `${person.category_id}`), person.area, person.year, person.images, person.location, person.category_id)} />
-                        <p>mt5lls ya 3m :)</p>
-                    </div>
-                </div>
-            </div>
-        )
-        )
-
         const ListGrid = () => {
             let ind = this.state.index;
             return (
@@ -115,14 +103,14 @@ class Villlas extends React.Component {
                     <section class="row">
                         {this.state.persons[0] ? (
                             <div class="row">
-                                <img class="col-12 col-md-8 imagesGrid wr" style={{ paddingBottom: "20px" }} src={encodeURI(url2 + `${this.state.persons[0].image}` + "&&type=" + `${this.state.persons[0].category_id}`)}></img>
+                                <img alt = {this.state.persons[0].name} class="col-12 col-md-8 imagesGrid wr" style={{ paddingBottom: "20px" }} src={encodeURI(url2 + `${this.state.persons[0].image}&&type=${this.state.persons[0].category_id}`)}></img>
                                 <div class="col" >
-                                    <img class="row imagesGrid wr" src={encodeURI(url2 + `${this.state.persons[0].image}` + "&&type=" + `${this.state.persons[0].category_id}`)}></img>
-                                    <div class="" style={{ paddingTop: "20px", paddingBottom: "20px" }}>  <img class=" row imagesGrid wr" src={encodeURI(url2 + `${this.state.persons[0].image}` + "&&type=" + `${this.state.persons[0].category_id}`)}></img>
+                                    <img alt = {this.state.persons[0].name} class="row imagesGrid wr" src={encodeURI(url2 + `${this.state.persons[0].image}&&type=${this.state.persons[0].category_id}`)}></img>
+                                    <div class="" style={{ paddingTop: "20px", paddingBottom: "20px" }}>  <img alt = {this.state.persons[0].name} class=" row imagesGrid wr" src={encodeURI(url2 + `${this.state.persons[0].image}&&type=${this.state.persons[0].category_id}`)}></img>
                                     </div></div>
                             </div>
                         ) : <div></div>}
-                        {this.state.persons.slice(ind, ind + 12).map((person, index) => <span class="col-sm-3" ><  img class="imagesGrid wr " src={encodeURI(url2 + `${person.image}` + "&&type=" + `${person.category_id}`)} onClick={() => this.passData(person.name, person.id, encodeURI(url2 + `${person.image}` + "&&type=" + `${person.category_id}`), person.area, person.year, person.images, person.location, person.category_id)} />
+                        {this.state.persons.slice(ind, ind + 12).map((person, index) => <span class="col-sm-3" ><img alt = {person.name} class="imagesGrid wr " src={encodeURI(url2 + `${person.image}&&type=${person.category_id}`)} onClick={() => this.passData(person.name, person.id, encodeURI(url2 + `${person.image}&&type=${person.category_id}`), person.area, person.year, person.images, person.location, person.category_id)} />
                             <h2><span className="editTxt" >{person.name}</span></h2>
                             <br></br>
                         </span>
