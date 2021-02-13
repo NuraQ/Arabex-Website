@@ -7,7 +7,6 @@ import About from './About';
 import Contact from './Contact';
 
 import Display from'./Display';
-import Conservation from'./Conservation';
 import Elem from'./Elem';
 import UpdateElement from'./UpdateElement'
 import Villlas from'./Villlas';
@@ -92,7 +91,7 @@ class App extends React.Component {
               }>Projects</NavLink>
              <div style={{position:relative,height:"50",width:"50"}}>
             <ul className="subNav" >
-               <li style={{ display: cls}} ><NavLink to="/Conservation" exact activeStyle={
+               <li style={{ display: cls}} ><NavLink to="/Villla" exact activeStyle={
                 { color: 'green' }
               }>CONSERVATION</NavLink>
               
@@ -197,7 +196,7 @@ class App extends React.Component {
               <Route path="/Conservation" exact strict render={
             () => {
               //return ( <div><h1>Welcome Home</h1>  <Login /></div>);
-              return <Conservation />
+              return <Villlas />
             }
           } />
          
