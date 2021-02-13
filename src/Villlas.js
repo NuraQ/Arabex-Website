@@ -11,7 +11,6 @@ const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
-
     return result;
 };
 const ColoredLine = ({ color }) => (
@@ -65,13 +64,8 @@ class Villlas extends React.Component {
     }
 
     async componentWillMount() {
-        console.log("fdsfsfs" + this.props.match.params.type
-        );
         if (this.props.location.type !== null)
-            console.log("dsdsdsDsdsdsdsdsds" + this.props.location.type);
         var url = this.state.mainUrl + "/" + "?type=" + this.props.match.params.type;
-        console.log("URL" + url);
-        console.log("DSd");
         let response = await fetch(url)
         let data = await response.json();
         this.setState({ persons: data, loading: false });
@@ -84,7 +78,6 @@ class Villlas extends React.Component {
         this.setState(initialState);
     }
     passData(name, ID, img, area, year, images, location, cat_id) {
-        console.log("locTest" + location);
         this.props.history.push({
             pathname: "/Villlas/Elem/" + `${ID}`,
             state: { name: name, id: ID, image: img, area: area, year: year, images: images, locationn: location, type: cat_id }//has nothing with component state
@@ -117,7 +110,6 @@ class Villlas extends React.Component {
 
         const ListGridd = () => {
             let ind = this.state.index;
-            console.log("perso" + JSON.stringify(this.state.persons[0]))
             return (
                 <div>
                     <section class="row">
