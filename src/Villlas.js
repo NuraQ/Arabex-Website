@@ -1,92 +1,12 @@
 
 import React from 'react';
-import archh from './archh.jpg'
-//import ReactDOM from 'react-dom';
-// Usually we use one component per file, here we have more
-import { MeventEmitter, url_g, User_g } from './globals.js'
+import Contact from './ContactUS'
+import { mainUrl } from './globals.js'
 import './Villa.css';
-
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import { withRouter } from "react-router";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import {
-    faYoutube,
-    faFacebook,
-    faTwitter,
-    faInstagram,
-    faThinkPeaks
-} from "@fortawesome/free-brands-svg-icons";
-import {
-    faEnvelope,
-} from "@fortawesome/free-regular-svg-icons";
-import GR from './GR.jpg';
 import './gallery.css'
 
-import Elem from './Elem'
-import Home from './Home'
-const grid = 8;
-
-
-const getItemStyle = (isDragging, draggableStyle) => ({
-    // some basic styles to make the items look a bit nicer
-    userSelect: "none",
-    padding: grid * 2,
-    margin: `0 0 ${grid}px 0`,
-
-    // change background colour if dragging
-    background: isDragging ? "lightgreen" : "grey",
-
-    // styles we need to apply on draggables
-    ...draggableStyle
-});
-
-const getListStyle = isDraggingOver => ({
-    background: isDraggingOver ? "lightblue" : "lightgrey",
-    padding: grid,
-});
-const Contact = () => (
-    <div style={{
-        display: "flex",
-
-        width: "100%",
-        backgroundImage: `url(${GR})`,
-        justifyContent: "center",
-        alignItems: "center",
-        //   backgroundColor: "rgb(250, 235, 215)",
-        height: 500
-    }}
-    >
-        <div
-
-            style={{
-                display: "inline-block",
-                height: 400,
-                width: "75%",
-                backgroundColor: "#e2e7ec",/* fallback color */
-                background: "#e2e7ec",
-                opacity: 0.8,
-
-            }}
-
-        >
-            <p style={{
-                fontSize: "1.4em",
-
-                marginTop: "14px",
-
-                marginLeft: "10px",
-            }}>Contact Us
-            </p>
-            <pre >{
-                ` Michael Graves Architecture & Design
- 341 Nassau St.
- Princeton, NJ 08540`}
-            </pre>
-            <SocialFollow />
-        </div>
-    </div>
-);
 const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
@@ -113,73 +33,32 @@ const ColoredLineThin = ({ color }) => (
     />
 );
 
-function SocialFollow() {
-    return (
-        <div className="social-container">
-            <a
-                href="https://www.youtube.com/c/jamesqquick"
-                className="youtube social"
-            >
-                <FontAwesomeIcon icon={faYoutube} size="2x" />
-            </a>
-            <a
-                href="https://www.facebook.com/Arabex-Arab-Experts-For-Architecture-Consultations-377223399037285/"
-                className="facebook social"
-            >
-                <FontAwesomeIcon icon={faFacebook} size="2x" />
-            </a>
-            <a href="https://www.twitter.com/jamesqquick" className="twitter social">
-                <FontAwesomeIcon icon={faTwitter} size="2x" />
-            </a>
-            <a
-                href="https://www.instagram.com/learnbuildteach"
-                className="instagram social"
-            >
-                <FontAwesomeIcon icon={faInstagram} size="2x" />
-            </a>
-            <br></br>
-            <a href="mailto:arabex.eng@gmail.com"
-                className="social">
-
-                <FontAwesomeIcon icon={faEnvelope} size="2x" />
-        arabex.eng@gmail.com
-        </a>
-        </div>
-    );
-}
 class Villlas extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
             dontSlide: true,
-
-            mainUrl: "http://127.0.0.1:9999",
+            mainUrl: mainUrl.url,
             persons: [],
             index: 0,
             img: null,
-
         }
         this.passData = this.passData.bind(this);
         this.decrement = this.decrement.bind(this);
         this.toggle = this.toggle.bind(this);
         this.onDragEnd = this.onDragEnd.bind(this);
-
-
-
     }
     onDragEnd(result) {
         // dropped outside the list
         if (!result.destination) {
             return;
         }
-
         const items = reorder(
             this.state.persons,
             result.source.index,
             result.destination.index
         );
-
         this.setState({
             persons: items
         });
@@ -196,7 +75,6 @@ class Villlas extends React.Component {
         let response = await fetch(url)
         let data = await response.json();
         this.setState({ persons: data, loading: false });
-
     }
 
     componentWillUnmount() {
@@ -213,24 +91,19 @@ class Villlas extends React.Component {
         })
     }
 
-
-
-
     toggle() {
         let prev_index = this.state.index;
         this.setState({ dontSlide: false, index: prev_index + 12 });
-
     }
+
     decrement() {
         let prev_index = this.state.index;
         this.setState({ index: prev_index - 12 });
-
     }
-    render() {
 
+    render() {
         let url2 = this.state.mainUrl + "/load_image/?img=";
         const list = this.state.persons.map(person => (
-
             <div key={person.ID}  >
                 <div class="col-sm" >
                     <div class="wid">
@@ -238,96 +111,46 @@ class Villlas extends React.Component {
                         <p>mt5lls ya 3m :)</p>
                     </div>
                 </div>
-
             </div>
-
-
         )
-
         )
-
-        const ListGrid = () => {
-
-            let v = this.state.index;
-            const result = this.state.persons.map((x, i) => {
-                let d = v + i;
-                console.log("I+" + i);
-                return d % 4 === 0 ? (this.state.persons.slice(d, d + 4)) : (null);
-            }).filter(x => x != null);
-
-            return (
-                <div>{this.state.index}
-
-                    {result.map((result, index) => {
-
-                        return (<section class="row" key={index}>
-                            {result.map(person => <span class="col-sm" ><  img class="imagesGrid wr " src={encodeURI(url2 + `${person.image}` + "&&type=" + `${person.category_id}`)} onClick={() => this.passData(person.name, person.id, encodeURI(url2 + `${person.image}` + "&&type=" + `${person.category_id}`), person.area, person.year, person.images, person.category_id)} />
-                                <h2><span class="editTxt">Bottom Left</span></h2>
-                                <br></br>
-                            </span>
-                            )}
-                        </section>);
-
-                    }
-                    )}
-
-                </div>
-            );
-        }
-
 
         const ListGridd = () => {
             let ind = this.state.index;
-console.log("perso"+JSON.stringify(this.state.persons[0]))
+            console.log("perso" + JSON.stringify(this.state.persons[0]))
             return (
                 <div>
-                    <section class="row"> 
-                    {this.state.persons[0] ? (
-                        <div class="row">
-                    <img class="col-12 col-md-8 imagesGrid wr"  style={{paddingBottom: "20px"}}src={encodeURI(url2 + `${this.state.persons[0].image}` + "&&type=" + `${this.state.persons[0].category_id}`)}></img> 
-                   <div class="col" > 
-                    <img class="row imagesGrid wr"src={encodeURI(url2 + `${this.state.persons[0].image}` + "&&type=" + `${this.state.persons[0].category_id}`)}></img> 
-                  <div class=""  style={{paddingTop: "20px",paddingBottom:"20px"}}>  <img class=" row imagesGrid wr"src={encodeURI(url2 + `${this.state.persons[0].image}` + "&&type=" + `${this.state.persons[0].category_id}`)}></img> 
-                    </div></div>
-                    </div>
-                    ) : <div></div>}
+                    <section class="row">
+                        {this.state.persons[0] ? (
+                            <div class="row">
+                                <img class="col-12 col-md-8 imagesGrid wr" style={{ paddingBottom: "20px" }} src={encodeURI(url2 + `${this.state.persons[0].image}` + "&&type=" + `${this.state.persons[0].category_id}`)}></img>
+                                <div class="col" >
+                                    <img class="row imagesGrid wr" src={encodeURI(url2 + `${this.state.persons[0].image}` + "&&type=" + `${this.state.persons[0].category_id}`)}></img>
+                                    <div class="" style={{ paddingTop: "20px", paddingBottom: "20px" }}>  <img class=" row imagesGrid wr" src={encodeURI(url2 + `${this.state.persons[0].image}` + "&&type=" + `${this.state.persons[0].category_id}`)}></img>
+                                    </div></div>
+                            </div>
+                        ) : <div></div>}
                         {this.state.persons.slice(ind, ind + 12).map((person, index) => <span class="col-sm-3" ><  img class="imagesGrid wr " src={encodeURI(url2 + `${person.image}` + "&&type=" + `${person.category_id}`)} onClick={() => this.passData(person.name, person.id, encodeURI(url2 + `${person.image}` + "&&type=" + `${person.category_id}`), person.area, person.year, person.images, person.location, person.category_id)} />
-                           
-
                             <h2><span className="editTxt" >{person.name}</span></h2>
                             <br></br>
-
                         </span>
                         )}
-
                     </section>
-
-
-
-
                 </div>
-
             )
         }
 
         return (
-
             <div >
-                {/*}  <div class="row">{list}</div>*/}
                 <div class="container"> <ListGridd /> </div>
                 <div class="container">
-
                     <div > <button onClick={() => { this.decrement() }}>Previous Page</button>{this.state.dontSlide}</div>
-
                     <span class="col-sm"><ColoredLineThin color="rgb(128, 128, 128)" /></span>
-
                     <div > <button onClick={() => { this.toggle() }}>Next Page</button>{this.state.dontSlide}</div>
                 </div>
                 <div>{this.state.index}</div>
-
                 <div>{!this.state.dontSlide && this.state.persons.length ? (<div> <div class="container"></div>
                 </div>) : (<div />)}</div>
-
                 <ColoredLine color="rgb(128, 41, 41)" />
                 <div class="container">
                     <div class="row">
@@ -338,22 +161,16 @@ console.log("perso"+JSON.stringify(this.state.persons[0]))
                         </div>
                         <span className="vline"></span>
                         <div class="col-sm" />
-
                         <div class="col-sm">
                             <button >meet our team!</button>
                             <div class="row"><br></br></div>
                             <button>Connect with us!</button>
-
                         </div>
                     </div>
                     <div class="row"></div>
-
                 </div>
                 <Contact />
-
             </div>);
     }
-
-
 }
 export default withRouter(Villlas);

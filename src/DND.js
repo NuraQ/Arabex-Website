@@ -9,7 +9,6 @@ function passData(item,history) {
   history.push({
     pathname: "/UpdateElement",
     state:{element:item}
-    
   })
 }
 

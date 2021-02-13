@@ -1,14 +1,13 @@
 import React from 'react';
 import { withRouter } from "react-router";
 import { url_g } from './globals';
-import archh from './archh.jpg'
 import './Eleme.css'
 import GR from './GR.jpg';
-import Update from './Update';
-
 import { Slide } from 'react-slideshow-image';
 import CrossfadeImage from 'react-crossfade-image';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Contact from './ContactUS'
+
 import {
     faYoutube,
     faFacebook,
@@ -21,83 +20,6 @@ import {
 
 //import ReactDOM from 'react-dom';
 // Usually we use one component per file, here we have more
-
-function SocialFollow() {
-    return (
-        <div className="social-container">
-            <a
-                href="https://www.youtube.com/c/jamesqquick"
-                className="youtube social"
-            >
-                <FontAwesomeIcon icon={faYoutube} size="2x" />
-            </a>
-            <a
-                href="https://www.facebook.com/Arabex-Arab-Experts-For-Architecture-Consultations-377223399037285/"
-                className="facebook social"
-            >
-                <FontAwesomeIcon icon={faFacebook} size="2x" />
-            </a>
-            <a href="https://www.twitter.com/jamesqquick" className="twitter social">
-                <FontAwesomeIcon icon={faTwitter} size="2x" />
-            </a>
-            <a
-                href="https://www.instagram.com/learnbuildteach"
-                className="instagram social"
-            >
-                <FontAwesomeIcon icon={faInstagram} size="2x" />
-            </a>
-            <br></br>
-            <a href="mailto:arabex.eng@gmail.com"
-                className="social">
-
-                <FontAwesomeIcon icon={faEnvelope} size="2x" />
-        arabex.eng@gmail.com
-        </a>
-        </div>
-    );
-}
-const Contact = () => (
-    <div style={{
-        display: "flex",
-
-        width: "100%",
-        backgroundImage: `url(${GR})`,
-        justifyContent: "center",
-        alignItems: "center",
-        //   backgroundColor: "rgb(250, 235, 215)",
-        height: 500
-    }}
-    >
-        <div
-
-            style={{
-                display: "inline-block",
-                height: 400,
-                width: "75%",
-                backgroundColor: "#e2e7ec",/* fallback color */
-                background: "#e2e7ec",
-                opacity: 0.8,
-
-            }}
-
-        >
-            <p style={{
-                fontSize: "1.4em",
-
-                marginTop: "14px",
-
-                marginLeft: "10px",
-            }}>Contact Us
-            </p>
-            <pre >{
-                ` Michael Graves Architecture & Design
- 341 Nassau St.
- Princeton, NJ 08540`}
-            </pre>
-            <SocialFollow />
-        </div>
-    </div>
-);
 
 
 const ColoredLine = ({ color }) => (
@@ -313,52 +235,35 @@ class Elem extends React.Component {
                     <Slideshow />
                 </div>
                 <h3>{Name}</h3>
-
                 <div class="container">
-
                     <div class="row divColor">
                         <div class="col-sm ">
-
                             <p>{Locationn}</p>
                             <p>{year}</p>
                             <p>{area}</p>
-
                         </div>
                         <div class="col-sm">
                             <CrossfadeImage duration={1000} timingFunction={"ease-out"} src={this.state.images[this.state.imageIndex]} />
                         </div>
-
                     </div>
-
                 </div>
                 <hr></hr>
                 <div class="container">
-
                     <div class="row divColor">
-
                         <div class="col-sm">
                             < CrossfadeImage duration={1000} timingFunction={"ease-out"} src={this.state.images[this.state.imageIndex + 1]} />
                         </div>
-
                         <div class="col-sm">
                             <p style={{ fontStyle: "oblique", fontSize: 22, textAlign: "center", paddingTop: 77 }}>this villa was built with specific modern design based on customers orders</p>
-
-
                         </div>
-
-
-
                     </div>
 
                     {this.state.switch}
                 </div>
                 <hr></hr>
-
                 <div class="container">
                     <div class="row">{slideImages.length > 3 ? (
-
                         <button class="specificButton" onClick={() => this.switchImages()}>show more images</button>
-
                     ) : (null)}
 
                     </div>
@@ -368,8 +273,6 @@ class Elem extends React.Component {
                         <div class="col-sm">{slideImages.length > 4 ? (
                             <CrossfadeImage duration={1000}
                                 timingFunction={"ease-out"} src={this.state.images[this.state.imageIndex + 2]} />
-
-
                         ) : (null)}
 
                         </div>

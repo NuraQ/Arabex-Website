@@ -108,7 +108,6 @@ class About extends Component {
   }
   render() {
     return (
-
       <div>
         <AboutCompany/>
         <div class="container"><this.GridOwners></this.GridOwners></div>
