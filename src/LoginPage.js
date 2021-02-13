@@ -54,7 +54,7 @@ class LoginPage extends Component {
     let pass = this.state.password;
     console.log(this.state);
     var url = mainUrl.url + "/process_get/:id?";
-    let url2 = url + "id=" + `${ID}` + "&" + "pass=" + `${pass}`;
+    let url2 = url + `id=${ID}&pass=${pass}`;
     const response = await fetch(url2, {
       method: "GET",
       headers: {
@@ -65,11 +65,10 @@ class LoginPage extends Component {
     })
 
     if (response.status === 200) {
-      const token = response.Cookie;
+      //const token = response.Cookie;
       this.setState({ success: true });
     } else {
       const res = await response.json();
-
       const error = new Error(res.error);
       alert(error);
 
@@ -97,17 +96,15 @@ class LoginPage extends Component {
   }
 
   store = e => {
-    if (e.target.value != "") {
+    if (e.target.value !== "") {
       this.setState({ storeURL: e.target.value });
     }
   }
 
   render() {
     return (
-
       <MDBContainer>
         {!this.state.success || this.state.error ? (
-
           <MDBRow>
             <MDBCol md='6'>
               <MDBCard
