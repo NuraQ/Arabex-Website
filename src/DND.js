@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import DragItem from "./DragItem";
 import { Grid, GridImage, GridItem } from "./Grid";
-import GridContext from "./GridContext"; import { contact } from './Update';
+import GridContext from "./GridContext"; 
 import { useHistory } from "react-router-dom";
 import './dnd.css'
 
@@ -21,7 +21,7 @@ function DND() {
         {items.map(item => (
           <DragItem key={item.id} id={item.id} onMoveItem={moveItem}>
             <GridItem>
-              <GridImage src={encodeURI("http://127.0.0.1:9999/load_image/?img=" + `${item.image}` + "&&type=" + `${item.category_id}`)}>
+              <GridImage src={encodeURI(`http://127.0.0.1:9999/load_image/?img=${item.image}&&type=${item.category_id}`)}>
                 <button className="btnInfo" onClick = {()=>passData(item,history)}  >{item.name}</button>
               </GridImage>
             </GridItem>
