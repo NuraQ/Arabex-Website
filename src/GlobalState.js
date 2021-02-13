@@ -1,7 +1,6 @@
 
 import { createGlobalState } from 'react-hooks-global-state';
 
-const initialState = { items: [] };
 const { setGlobalState,useGlobalState }  = createGlobalState({ items: [], done:false});
 
 export const setValues = (x) => {
