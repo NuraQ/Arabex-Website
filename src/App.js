@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Link, NavLink, Redirect, Prompt, Route } from 'react-router-dom';
 import LOGO from'./LOGO.jpg';
@@ -17,32 +16,19 @@ import withAuth from './withAuth';
 
 import Update from'./Update';
 import Add from'./Add';
-import FormPage from'./log';
 
 import { BrowserRouter } from 'react-router-dom';
 import { relative } from 'path';
-const ColoredLine = ({ color }) => (
-  <hr
-      style={{
-          color: color,
-          backgroundColor: color,
-          height: 3,
-          width:2
-      }}
-  />
-);
 
 class App extends React.Component {
 
   state = {
     v: 7,
     appear:false,
-    cls: 'row',
-  
+    cls: 'row', 
   }
   
   changeStyle() {
-    //alert('dd');
 
     let v = this.dropdown.style.display;
     //alert (" "+v+" ,:"+nv)
